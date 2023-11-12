@@ -4,16 +4,11 @@
 
 - Após o download, dentro do [Visual Studio Code](https://code.visualstudio.com/), execute o comando para criar e utilizar o ambiente Python
 
-Comando para criar o ambiente de desenvolvimento:
-
-```
-docker-compose build
-```
 
 Comando para utilizar o ambiente de desenvolvimento criado:
 
 ```
-docker-compose up -d
+   docker-compose up -d --build
 ```
 
 ## Visual Studio Code
@@ -44,6 +39,7 @@ Aqui estão as instruções para instalar o Visual Studio Code (VSCode) em difer
    [Debian ou Ubunto](https://code.visualstudio.com/download). Caso utilize outra distribuição, [neste link você encontra a documentação oficial com as explicações e passo a passo da instalação](https://code.visualstudio.com/docs/setup/linux).
 
 ## Rodando a API Produtos utilizando o framework Django
+01:25
 
 Acessar o diretório fastapi-produtos
 
@@ -61,12 +57,20 @@ Para ativar o ambiente virtual
 
 ```
 source venv/bin/activate
+
+deactivate
+
 ```
 
 Instalar o Django
 
 ```
 pip install django
+
+```
+
+pip install --upgrade pip
+
 ```
 
 Criar um arquivo txt com as dependências do projeto
@@ -74,6 +78,12 @@ Criar um arquivo txt com as dependências do projeto
 ```
 pip freeze > requirements.txt
 ```
+Criar o projeto django
+
+django-admin startproject setup .
+
+(todo projeto sjango possui uma pasta setup)
+---
 
 Para executar o servidor Django
 
@@ -84,7 +94,7 @@ python manage.py runserver 0.0.0.0:8000
 Para criar um app no Django
 
 ```
-python  manage.py startapp produto
+python manage.py startapp produto
 ```
 
 Criar a migração dos modelos Django no banco de dados
@@ -93,6 +103,7 @@ Criar a migração dos modelos Django no banco de dados
 python manage.py makemigrations
 ```
 
+Efetiva as migrações
 ```
 python manage.py migrate
 ```
@@ -101,24 +112,64 @@ Criar um super usuário para o Django Admin
 
 ```
 python manage.py createsuperuser
+
+http://0.0.0.0:8000/admin/login/?next=/admin/
+user: root
+pass: 123
 ```
 
 ## Rodando a API Produtos utilizando o framework FastAPI
 
-Acessar o diretório fastapi-produtos
+Criar uma pasta api-produtos no src
 
 ```
-cd /referencial/src/fastapi-produtos
+mkdir api-produtos
+```
+
+Criar ambiente virtual
+
+```
+Acessar a pasta api-produtos
+```
+cd api-produtos
+```
+
+python -m venv ./venv
+```
+Para ativar o ambiente virtual
+
+```
+source venv/bin/activate
+
+deactivate
+
 ```
 
 Para instalar os pacotes necessários para rodar o servidor FastAPI
 
 ```
 pip install fastapi uvicorn
+
+```
+Fazer upgrade do pip
+
+pip install --upgrade pip
+```
+Criar um arquivo txt com as dependências do projeto
+
+pip freeze > requirements.txt
+```
+Criar um arquivo
+
+touch app.py
+
 ```
 
 Para executar o servidor FastAPI
 
-```
 uvicorn app:app --host 0.0.0.0 --port 8080 --reload
 ```
+Acessar documentação
+http://0.0.0.0:8080/docs
+
+http://0.0.0.0:8080/redoc
